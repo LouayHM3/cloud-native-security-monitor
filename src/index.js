@@ -24,3 +24,7 @@ export function metrics() {
 export function securitySummary() {
   return { imageFindings, policyDecisions, runtimeEvents, metrics: metrics() };
 }
+
+export function riskScore() {
+  return imageFindings.filter(item => item.severity === 'HIGH').length * 5 + policyDecisions.filter(item => item.decision === 'deny').length * 3 + runtimeEvents.filter(item => item.priority === 'Warning').reduce((total, item) => total + item.count, 0);
+}

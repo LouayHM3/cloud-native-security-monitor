@@ -1,0 +1,5 @@
+{
+  "highImageFindingThreshold": 1,
+  "policyDenialThreshold": 1,
+  "runtimeWarningThreshold": 5
+}

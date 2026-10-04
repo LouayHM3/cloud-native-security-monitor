@@ -1,0 +1,10 @@
+- rule: Terminal shell in container
+  desc: Detect an interactive shell spawned inside a container
+  condition: container and proc.name in (bash, sh, zsh)
+  output: Shell spawned in container (user=%user.name pod=%k8s.pod.name)
+  priority: WARNING
+- rule: Unexpected outbound connection
+  desc: Detect a workload opening a connection outside its allowlist
+  condition: container and outbound and not fd.sip in (10.0.0.0/8)
+  output: Unexpected outbound network connection (pod=%k8s.pod.name)
+  priority: NOTICE

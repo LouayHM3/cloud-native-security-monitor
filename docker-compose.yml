@@ -1,0 +1,11 @@
+services:
+  security-monitor:
+    build: .
+    ports: ["3002:3002"]
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    ports: ["9090:9090"]
+    volumes: ["./infra/prometheus.yml:/etc/prometheus/prometheus.yml:ro"]
+  grafana:
+    image: grafana/grafana:11.1.0
+    ports: ["3000:3000"]

@@ -1,0 +1,1 @@
+{"Results":[{"Target":"payments/api:2.4.1","Class":"os-pkgs","Vulnerabilities":[{"VulnerabilityID":"CVE-2024-21626","Severity":"HIGH","Title":"Container escape risk"}]},{"Target":"payments/worker:2.4.1","Class":"config","MisconfSummary":{"Successes":4,"Failures":1}}]}
