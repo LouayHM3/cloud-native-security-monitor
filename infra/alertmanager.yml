@@ -1,0 +1,10 @@
+route:
+  receiver: security-on-call
+  group_by: [alertname, namespace]
+  group_wait: 30s
+  repeat_interval: 4h
+receivers:
+  - name: security-on-call
+    webhook_configs:
+      - url: http://security-monitor:3002/alerts/webhook
+        send_resolved: true

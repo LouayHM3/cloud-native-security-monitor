@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: trivy-image-scan
+  labels: { app: security-supply-chain }
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: trivy
+          image: aquasec/trivy:0.55.0
+          args: ["image", "--format", "json", "--output", "/reports/trivy.json", "payments/api:2.4.1"]
+          volumeMounts: [{ name: reports, mountPath: /reports }]
+      volumes: [{ name: reports, emptyDir: {} }]

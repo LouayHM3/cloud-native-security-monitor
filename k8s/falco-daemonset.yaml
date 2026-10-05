@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata: { name: falco }
+spec:
+  selector: { matchLabels: { app: falco } }
+  template:
+    metadata: { labels: { app: falco } }
+    spec:
+      serviceAccountName: falco
+      containers:
+        - name: falco
+          image: falcosecurity/falco:0.38.2
+          securityContext: { privileged: true }
+          args: ["falco", "--cri", "/run/containerd/containerd.sock"]
+          volumeMounts:
+            - { name: rules, mountPath: /etc/falco/rules.d, readOnly: true }
+            - { name: runtime, mountPath: /run/containerd/containerd.sock }
+      volumes:
+        - { name: rules, configMap: { name: falco-rules } }
+        - { name: runtime, hostPath: { path: /run/containerd/containerd.sock } }

@@ -12,4 +12,4 @@ curl http://localhost:3002/metrics
 curl http://localhost:3002/health
 ```
 
-The `k8s`, `infra`, `dashboards`, `data`, and Docker files show the production deployment contracts. In a cluster, the in-memory arrays become scanner exports, admission webhook decisions, and Falco event streams.
+The `k8s`, `infra`, `dashboards`, `data`, `.github`, and Docker files show the production deployment contracts. `docs/integration-map.md` maps each local adapter to Trivy, OPA, Falco, Prometheus, Grafana, and Alertmanager.

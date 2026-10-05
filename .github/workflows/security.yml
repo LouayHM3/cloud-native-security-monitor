@@ -1,0 +1,16 @@
+name: security-controls
+on: [push, pull_request]
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan configuration with Trivy
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          scan-type: config
+          scan-ref: .
+          exit-code: '0'
+      - uses: actions/setup-node@v4
+        with: { node-version: 24 }
+      - run: npm test
