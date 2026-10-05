@@ -1,0 +1,13 @@
+openapi: 3.0.3
+info: { title: Cloud-Native Security Monitor API, version: 1.0.0 }
+paths:
+  /health: { get: { responses: { '200': { description: Healthy } } } }
+  /: { get: { responses: { '200': { description: Security summary } } } }
+  /metrics: { get: { responses: { '200': { description: Prometheus metrics } } } }
+  /alerts/webhook:
+    post:
+      security: [{ alertSecret: [] }]
+      responses: { '202': { description: Alert accepted } }
+components:
+  securitySchemes:
+    alertSecret: { type: apiKey, in: header, name: x-alert-secret }

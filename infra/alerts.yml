@@ -1,0 +1,12 @@
+groups:
+  - name: security-monitor
+    rules:
+      - alert: HighImageFindings
+        expr: security_image_findings{severity="high"} >= 1
+        for: 10m
+        labels: { severity: critical }
+        annotations: { summary: High-severity image finding detected }
+      - alert: PolicyDenialsIncreasing
+        expr: increase(security_policy_denials[15m]) > 0
+        labels: { severity: warning }
+        annotations: { summary: A workload was rejected by policy }
